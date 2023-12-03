@@ -1,0 +1,107 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<h1 class="my-3 text-center">Welcome to Lyang</h1>
+<p class="text-center">Enter your details below to register:</p>
+<!-- <figure class="text-center">
+    <blockquote class="blockquote">
+      <p>Welcome to Snack!</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+      Enter your details below to register:
+    </figcaption>
+  </figure> -->
+<hr>
+<div class="d-flex justify-content-center">
+<div class=" spinner-border spinner-border-sm text-warning" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div>
+    <div class="col-md-12">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+    <div class="row">
+        <div class="class col-md-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <form class="row g-3">
+                    <div class="col-md-6 mb-2">
+                        <label for="name" name class="form-label">name</label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="John Doe">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="email" class="form-label">email</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="jhon@gmail.com">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="phone" class="form-label">phone</label>
+                        <input type="number" name="phone" class="form-control" id="phone" placeholder="9988339001">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="address" class="form-label">address</label>
+                        <input type="text" name="address"class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="gender">gender</label>
+                        <label><input type="radio" name="gender" value="male">Male</label>
+                        <label><input type="radio" name="gender" value="female">Female</label>
+                        <!-- </div> -->
+                    </div>
+                    <div class="col-12 my-3">
+                        <button type="submit" class="btn btn-info">Sign in</button>
+                    </div>
+                </form>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h2>All users</h2>
+    <hr>
+    <table class="table table-dark table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        {% for users in UsersData %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ users.name }}</td>
+            <td>{{ users.email }}</td>
+            <td>{{ users.phone }}</td>
+            <td>{{ users.address }}</td>
+            <td>{{ users.gender }}</td>
+            <td>
+                <a href="{% url 'edit' users.id %}" class="btn btn-sm btn-success">Edit</a>
+                <a href="{% url 'delete' users.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+
+
+{% endblock %}

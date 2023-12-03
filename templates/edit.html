@@ -1,0 +1,68 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<h1 class="my-3">Edit</h1>
+<p>Update your records below!</p>
+<hr>
+<div>
+    <div class="col-md-12">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+    <div class="row">
+        <div class="class col-md-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <form class="row g-3">
+                    <div class="col-md-6 mb-2">
+                        <label for="name" name class="form-label">name</label>
+                        <input type="text" name="name" value="{{ users.name }}" class="form-control" id="name" placeholder="John Doe">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="email" class="form-label">email</label>
+                        <input type="email" name="email" value="{{ users.email }}" class="form-control" id="email" placeholder="jhon@gmail.com">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="phone" class="form-label">phone</label>
+                        <input type="number" name="phone" value="{{ users.phone }}" class="form-control" id="phone" placeholder="9988339001">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="address" class="form-label">address</label>
+                        <input type="text" name="address" value="{{ users.address }}" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <label for="gender">gender</label>
+                        <label><input type="radio" name="gender" 
+                            {% if users.gender == 'male' %}
+                                checked
+                            {% endif %}
+                                value="male">Male</label>
+                        <label><input type="radio"  name="gender" 
+                            {% if users.gender == 'female' %}
+                                checked
+                            {% endif %}
+                                value="female">Female</label>
+                        <!-- </div> -->
+
+
+                    </div>
+                    <div class="col-12 my-3">
+                        <button type="submit" class="btn btn-info">Update Record</button>
+                    </div>
+                </form>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
